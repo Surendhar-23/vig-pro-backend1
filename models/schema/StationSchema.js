@@ -124,6 +124,8 @@ const StationSchema = new mongoose.Schema({
       route: [{ type: String }],
       startingPoint: { type: String }, //place of installation are same
       organizationName: { type: String },
+      otherLocation: { type: String },
+      RTOpermission: { type: String },
       immersionSafety: {
         barricade: { type: Boolean, default: false },
         lighting: { type: Boolean, default: false },
