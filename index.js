@@ -15,13 +15,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(
-  cors({
-    origin: "*", // Allows all origins; for security, replace '*' with specific domains in production
-    methods: "GET,POST,PUT,DELETE,OPTIONS",
-    allowedHeaders: "Content-Type, Authorization",
-  })
-);
+app.use(cors());
 
 connectdb();
 
