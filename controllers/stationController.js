@@ -66,7 +66,7 @@ const addIdolToStationController = async (req, res) => {
     station.stationIdol.push(idolData);
     const updatedStation = await station.save();
     // res.status(200).json(updatedStation);
-    res.status(200).json(idolData.idol_id);
+    res.status(200).json({ id: idolData.idol_id, idol: idolData });
   } catch (error) {
     res.status(500).json({ message: error });
   }
@@ -237,16 +237,33 @@ const addIdolFileController = async (req, res) => {
     if (!idol) {
       return res.status(404).json({ message: "Idol not found." });
     }
+    if (!files) {
+      return res.status(400).json({ message: "No files uploaded.", idol });
+    }
 
-    idol.idolApplication = files.idolApplication[0].location;
-    idol.idolImage = files.idolImage[0].location;
-    idol.applicantImage = files.applicantImage[0].location;
+    // Update only if the respective file exists
+    if (files.idolApplication && files.idolApplication.length > 0) {
+      idol.idolApplication = files.idolApplication[0].location;
+    }
+
+    if (files.idolImage && files.idolImage.length > 0) {
+      idol.idolImage = files.idolImage[0].location;
+    }
+
+    if (files.applicantImage && files.applicantImage.length > 0) {
+      idol.applicantImage = files.applicantImage[0].location;
+    }
+
     await station.save();
 
     res.status(200).json({
       message: "Files successfully uploaded and added to the idol.",
       idol,
     });
+    // If error is related to conflict or duplicate data
+    if (error.code === 409) {
+      return res.status(409).json({ message: "Resource conflict." });
+    }
   } catch (error) {
     console.error(error);
     res
