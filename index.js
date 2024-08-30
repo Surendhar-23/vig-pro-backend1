@@ -20,7 +20,7 @@ app.use(cors());
 connectdb();
 
 app.use("/test", (req, res) => {
-  res.send("testing");
+  res.send("testing22");
 });
 
 app.use("/api/stations", stationRoutes);
