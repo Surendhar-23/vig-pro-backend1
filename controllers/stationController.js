@@ -256,14 +256,14 @@ const addIdolFileController = async (req, res) => {
 
     await station.save();
 
-    res.status(200).json({
+    return res.status(200).json({
       message: "Files successfully uploaded and added to the idol.",
       idol,
     });
     // If error is related to conflict or duplicate data
-    if (error.code === 409) {
-      return res.status(409).json({ message: "Resource conflict." });
-    }
+    // if (error.code === 409) {
+    //   return res.status(409).json({ message: "Resource conflict." });
+    // }
   } catch (error) {
     console.error(error);
     res
