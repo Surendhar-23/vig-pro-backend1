@@ -18,14 +18,15 @@ app.use(express.urlencoded({ extended: true }));
 // app.use(cors());
 
 // Configure CORS to allow requests from specific origin
-const corsOptions = {
-  origin: "https://vcpoliceportal.in", // Your frontend domain
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  credentials: true,
-  allowedHeaders: "Content-Type,Authorization", // Adjust headers if necessary
-};
+app.use(
+  cors({
+    origin: "*", // Allow all origins
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Allow these methods
+    allowedHeaders: "*", // Allow all headers
+  })
+);
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
 connectdb();
 
