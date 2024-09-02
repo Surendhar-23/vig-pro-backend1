@@ -21,10 +21,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
     origin: "*", // Allow all origins
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Allow these methods
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS", // Include OPTIONS to handle preflight
     allowedHeaders: "*", // Allow all headers
+    credentials: true, // Allow credentials (if needed)
   })
 );
+
+// Handle preflight requests for all routes
+app.options("*", cors()); // This will handle the OPTIONS preflight request for all routes
 
 // app.use(cors(corsOptions));
 
