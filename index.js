@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Configure CORS to allow requests from specific origin
 const corsOptions = {
-  origin: "https://test.vcpoliceportal.in", // Your frontend domain
+  origin: "https://vcpoliceportal.in", // Your frontend domain
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
   allowedHeaders: "Content-Type,Authorization", // Adjust headers if necessary
