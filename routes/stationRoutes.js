@@ -25,7 +25,7 @@ router.put(
 );
 
 // Delete Idol from Station
-router.delete(
+router.post(
   "/:stationId/:idolId/deleteIdol",
   stationController.deleteIdolFromStationController
 );
